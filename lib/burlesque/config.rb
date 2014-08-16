@@ -11,15 +11,13 @@ module Burlesque
 
   module Configurable
     def configure
-      @config ||= Burlesque::Config.new
+      @config ||= Config.new
 
       yield @config if block_given?
     end
 
     def config
-      unless instance_variable_defined?(:@config)
-        raise ConfigurationError.new('Configuration missing')
-      end
+      configure unless instance_variable_defined?(:@config)
 
       @config
     end
