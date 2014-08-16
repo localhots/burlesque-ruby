@@ -22,7 +22,7 @@ end
 ## Usage
 
 ### Publish
-```
+```ruby
 require 'burlesque'
 
 client = Burlesque::Client.new
@@ -37,7 +37,7 @@ end
 ```
 
 ### Subscribe
-```
+```ruby
 require 'burlesque'
 
 client = Burlesque::Client.new
@@ -52,7 +52,7 @@ end
 ```
 
 ### Status
-```
+```ruby
 require 'json'
 require 'burlesque'
 
@@ -61,7 +61,7 @@ puts JSON.pretty_generate(client.status)
 ```
 
 ### Debug
-```
+```ruby
 require 'json'
 require 'burlesque'
 
