@@ -5,7 +5,7 @@ require 'burlesque/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'burlesque-client'
-  spec.version       = Burlesque::Client::VERSION
+  spec.version       = Burlesque::VERSION
   spec.authors       = ['Gregory Eremin']
   spec.email         = ['g@erem.in']
   spec.summary       = %q{TODO: Write a short summary. Required.}
@@ -18,6 +18,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler', '~> 1.6'
+  spec.add_development_dependency 'bundler', '>= 1.6'
   spec.add_development_dependency 'rake'
 end
