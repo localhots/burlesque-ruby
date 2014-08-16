@@ -1,29 +1,98 @@
-# Burlesque::Client
+# Burlesque message queue client
 
-TODO: Write a gem description
+Ruby wrapper over [Burlesque message queue](https://github.com/KosyanMedia/burlesque) API
 
 ## Installation
+```
+gem install burlesque-client
+```
 
-Add this line to your application's Gemfile:
+## Configuration
+Client defaults are the same as Burlesque server defaults.
+If you're using non-standard settings, you can configure client to use them instead.
 
-    gem 'burlesque-client'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install burlesque-client
+```ruby
+Burlesque.configure do |c|
+  c.host = '10.10.5.155'
+  c.port = 4402
+  c.timeout = 30
+end
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+### Publish
+```
+require 'burlesque'
 
-## Contributing
+client = Burlesque::Client.new
+queue = 'urgent'
+msg = 'Process this message as soon as possible!'
 
-1. Fork it ( https://github.com/[my-github-username]/burlesque-client/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+if client.publish(queue, msg)
+  puts 'Message successfully published!'
+else
+  puts 'Failed to publish message'
+end
+```
+
+### Subscribe
+```
+require 'burlesque'
+
+client = Burlesque::Client.new
+
+res = client.subscribe('urgent', 'someday', 'never')
+if res.nil?
+  puts 'No messages'
+else
+  puts "Message from queue #{res[:queue]}:"
+  puts res[:message]
+end
+```
+
+### Status
+```
+require 'json'
+require 'burlesque'
+
+client = Burlesque::Client.new
+puts JSON.pretty_generate(client.status)
+```
+
+### Debug
+```
+require 'json'
+require 'burlesque'
+
+client = Burlesque::Client.new
+puts JSON.pretty_generate(client.debug)
+```
+
+## CLI
+```
+$ bsq --help
+
+Usage:
+    Publish:
+        $ bsq pub urgent "Process this message as soon as possible!"
+        or
+        $ cat urgent-183.txt | bsq pub urgent
+    Subscribe:
+        $ bsq sub urgent > urgent-184.txt
+    Status:
+        $ bsq status
+    Debug:
+        $ bsq debug
+
+Options:
+    -h, --host [HOST]                Burlesque host
+    -p, --port [PORT]                Burlesque port
+    -t, --timeout [TIMEOUT]          Subscription timeout
+    -v, --version                    Display Burlesque Ruby client version
+        --help                       Display this help message
+```
+
+## Licence
+
+[MIT](https://github.com/KosyanMedia/burlesque-ruby/blob/master/LICENCE.txt)
