@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Burlesque::VERSION
   spec.authors       = ['Gregory Eremin']
   spec.email         = ['g@erem.in']
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ''
+  spec.summary       = %q{Burlesque API wrapper}
+  spec.description   = %q{Ruby wrapper over Burlesque message queue API}
+  spec.homepage      = 'http://github.com/KosyanMedia/burlesque'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
