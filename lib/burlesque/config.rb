@@ -3,7 +3,7 @@ module Burlesque
     attr_accessor :host, :port, :timeout
 
     def initialize
-      @host = "127.0.0.1"
+      @host = '127.0.0.1'
       @port = 4401
       @timeout = 30
     end
@@ -18,7 +18,7 @@ module Burlesque
 
     def config
       unless instance_variable_defined?(:@config)
-        raise ConfigurationError.new("Configuration missing")
+        raise ConfigurationError.new('Configuration missing')
       end
 
       @config
