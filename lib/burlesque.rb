@@ -1,4 +1,3 @@
-require "burlesque/version"
-
-module Burlesque
-end
+require 'burlesque/version'
+require 'burlesque/config'
+require 'burlesque/client'
