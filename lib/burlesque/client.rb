@@ -23,8 +23,7 @@ module Burlesque
       res.body == OK
     end
 
-    def subscribe queues
-      queues = Array(queues)
+    def subscribe *queues
       req = Net::HTTP::Get.new("#{SUB_ENDPOINT}?queues=#{queues.join(?,)}")
 
       begin
