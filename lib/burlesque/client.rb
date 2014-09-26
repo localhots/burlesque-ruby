@@ -7,6 +7,7 @@ module Burlesque
 
     PUB_ENDPOINT = '/publish'
     SUB_ENDPOINT = '/subscribe'
+    FLUSH_ENDPOINT = '/flush'
     STATUS_ENDPOINT = '/status'
     DEBUG_ENDPOINT = '/debug'
     OK = 'OK'
@@ -29,6 +30,16 @@ module Burlesque
       begin
         res = http.request(req)
         {message: res.body, queue: res.header['Queue']} if res.is_a? Net::HTTPOK
+      rescue Net::ReadTimeout
+      end
+    end
+
+    def flush *queues
+      req = Net::HTTP::Get.new("#{FLUSH_ENDPOINT}?queues=#{queues.join(?,)}")
+
+      begin
+        res = http.request(req)
+        JSON.parse(res.body) if res.is_a? Net::HTTPOK
       rescue Net::ReadTimeout
       end
     end
